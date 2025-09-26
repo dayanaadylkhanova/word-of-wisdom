@@ -1,0 +1,22 @@
+services:
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+        - LISTEN_ADDR=:8080
+        - POW_DIFFICULTY=22
+        - POW_TTL=60s
+        - LOG_LEVEL=info
+    ports:
+      - "8080:8080"
+
+  client:
+    build:
+      context: .
+      dockerfile: cmd/client/Dockerfile
+    environment:
+      - SERVER_ADDR=server:8080
+      - LOG_LEVEL=info
+    depends_on:
+      - server

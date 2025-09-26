@@ -1,1 +1,0 @@
-package word_of_wisdom
